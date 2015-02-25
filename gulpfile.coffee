@@ -17,7 +17,7 @@ reactify     = require 'coffee-reactify'
 
 reload = browserSync.reload
 p =
-  jsx: './scripts/app.coffee'
+  jsx: './scripts/app.jsx'
   scss: 'styles/main.scss'
   bundle: 'app.js'
   distJs: 'dist/js'
