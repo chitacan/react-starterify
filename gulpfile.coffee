@@ -17,10 +17,10 @@ reactify     = require 'coffee-reactify'
 
 reload = browserSync.reload
 p =
-  jsx: './scripts/app.jsx'
-  scss: 'styles/main.scss'
-  bundle: 'app.js'
-  distJs: 'dist/js'
+  app    : './scripts/app.coffee'
+  scss   : 'styles/main.scss'
+  bundle : 'app.js'
+  distJs : 'dist/js'
   distCss: 'dist/css'
 
 gulp.task 'clean', (cb) ->
@@ -31,7 +31,7 @@ gulp.task 'browserSync', ->
     server: baseDir: './'
 
 gulp.task 'watchify', ->
-  bundler = watchify browserify p.jsx, watchify.args
+  bundler = watchify browserify p.app, watchify.args
 
   rebundle = ->
     return bundler
@@ -48,7 +48,7 @@ gulp.task 'watchify', ->
   return rebundle()
 
 gulp.task 'browserify', ->
-  browserify p.jsx
+  browserify p.app
     .transform extension: 'coffee', reactify
     .transform babelify
     .bundle()
