@@ -34,7 +34,7 @@ gulp.task 'watchify', ->
   bundler = watchify browserify p.app, watchify.args
 
   rebundle = ->
-    return bundler
+    bundler
       .bundle()
       .on 'error', notify.onError()
       .pipe source p.bundle
@@ -45,7 +45,7 @@ gulp.task 'watchify', ->
     .transform extension: 'coffee', reactify
     .transform babelify
     .on 'update', rebundle
-  return rebundle()
+  rebundle()
 
 gulp.task 'browserify', ->
   browserify p.app
@@ -60,7 +60,7 @@ gulp.task 'browserify', ->
     .pipe gulp.dest p.distJs
 
 gulp.task 'styles', ->
-  return gulp.src p.scss
+  gulp.src p.scss
     .pipe changed p.distCss
     .pipe sass errLogToConsole: true
     .on 'error', notify.onError()
