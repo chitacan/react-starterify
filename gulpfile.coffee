@@ -82,7 +82,7 @@ gulp.task 'watch', ['clean'], ->
 
 gulp.task 'build', ['clean'], ->
   process.env.NODE_ENV = 'production'
-  gulp.start ['browserify', 'styles']
+  gulp.start ['browserify', 'styles', 'index']
 
 gulp.task 'deploy', ['build', 'browserify'], ->
   gulp.src './dist/**/*'
