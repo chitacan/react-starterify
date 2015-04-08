@@ -14,6 +14,7 @@ notify       = require 'gulp-notify'
 browserSync  = require 'browser-sync'
 sourcemaps   = require 'gulp-sourcemaps'
 reactify     = require 'coffee-reactify'
+deploy       = require 'gulp-gh-pages'
 
 reload = browserSync.reload
 p =
@@ -79,5 +80,8 @@ gulp.task 'build', ['clean'], ->
   process.env.NODE_ENV = 'production'
   gulp.start ['browserify', 'styles']
 
-gulp.task 'default', ->
-  console.log 'Run "gulp watch or gulp build"'
+gulp.task 'deploy', ['build', 'browserify'], ->
+  gulp.src './dist/**/*'
+    .pipe deploy()
+
+gulp.task 'default', -> gulp.start 'watch'
